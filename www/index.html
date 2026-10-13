@@ -1,67 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#101d22">
-<title>Isla Bruma 3D</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#142522">
+<title>Isla Bruma — Supervivencia 3D</title>
 <style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101d22;color:white;font-family:Arial,sans-serif;touch-action:none}
-#game{position:fixed;inset:0;width:100%;height:100%;display:block}
-#hud{position:fixed;inset:0;pointer-events:none;z-index:2}
-#title{position:absolute;top:10px;left:12px;font-weight:bold;font-size:18px;text-shadow:0 2px 5px #000}
-#stats{position:absolute;top:38px;left:12px;padding:8px;background:#071115bb;border-radius:8px;font-size:12px;line-height:1.5}
-#help{position:absolute;top:10px;right:10px;text-align:right;font-size:11px;text-shadow:0 2px 4px #000}
-#hpbar,#stbar{height:5px;width:100px;background:#555;border-radius:5px;overflow:hidden}
-#hpbar>div{height:100%;width:100%;background:#e85c49}
-#stbar>div{height:100%;width:100%;background:#66c8a1}
-#hint,#msg{position:absolute;left:50%;transform:translateX(-50%);background:#071115cc;border-radius:8px;padding:8px 12px;text-align:center;font-size:12px;white-space:nowrap}
-#hint{bottom:190px;opacity:0}
-#msg{bottom:155px}
-#joy{position:absolute;left:20px;bottom:24px;width:120px;height:120px;border:2px solid #ffffff66;border-radius:50%;background:#07111566;pointer-events:auto}
-#knob{position:absolute;left:34px;top:34px;width:48px;height:48px;border-radius:50%;background:#c9e6e9cc;border:2px solid white}
-.btn{position:absolute;pointer-events:auto;width:62px;height:62px;border:1px solid #ffffff88;border-radius:50%;background:#172d36dd;color:white;font-size:11px;font-weight:bold;touch-action:none}
-#attack{right:18px;bottom:25px;width:76px;height:76px}
-#gather{right:90px;bottom:100px}
-#heal{right:20px;bottom:116px}
-#build{right:20px;bottom:190px}
-#start{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(#08121acc,#08121fee);padding:24px}
-#start button{padding:14px 25px;border:0;border-radius:25px;background:#ffbf50;font-size:17px;font-weight:bold}
-</style>
-</head>
-<body>
-<div id="game"></div>
-<div id="hud">
-  <div id="title">ISLA BRUMA 3D</div>
-  <div id="stats">
-    Vida: <span id="hptext">100</span>
-    <div id="hpbar"><div id="hp"></div></div>
-    Energía: <span id="sttext">100</span>
-    <div id="stbar"><div id="st"></div></div>
-    <div>🪵 <span id="wood">0</span> · 🪨 <span id="stone">0</span> · 🫐 <span id="berry">0</span> · 🌿 <span id="fiber">0</span></div>
-  </div>
-  <div id="help">Explora la isla<br>Arrastra para mirar<br>Reúne recursos y sobrevive</div>
-  <div id="hint"></div>
-  <div id="msg">La niebla oculta peligros...</div>
-  <div id="joy"><div id="knob"></div></div>
-  <button class="btn" id="attack">ATACAR</button>
-  <button class="btn" id="gather">REUNIR</button>
-  <button class="btn" id="heal">CURAR</button>
-  <button class="btn" id="build">REFUGIO</button>
-</div>
-<div id="start">
-  <div>
-    <h1>ISLA BRUMA</h1>
-    <p>Explora cinco biomas, recoge recursos y sobrevive.</p>
-    <button id="go">ENTRAR EN LA ISLA</button>
-  </div>
-</div>
-<script>
-document.getElementById('go').addEventListener('click', function () {
-  document.getElementById('start').style.display = 'none';
-});
-</script>
-<script src="./game.js"></script>
-</body>
-</html>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#142522;color:#f6f2df;font-family:system-ui,-apple-system,Segoe UI,sans-serif;touch-action:none}#game{position:fixed;inset:0}canvas{display:block;width:100%;height:100%}.hud{position:fixed;z-index:3;pointer-events:none;text-shadow:0 2px 4px #0009}.brand{top:env(safe-area-inset-top,8px);left:12px;font-weight:900;letter-spacing:2px;font-size:14px;color:#f2d18b}.sub{font-size:10px;letter-spacing:1.5px;color:#d5e0d4}.status{top:12px;right:12px;width:138px;background:#10201dc9;border:1px solid #ffffff26;border-radius:12px;padding:9px}.bar{height:7px;background:#453d37;border-radius:8px;margin:4px 0 7px;overflow:hidden}.fill{height:100%;width:100%;background:linear-gradient(90deg,#a9d16b,#e4d780);border-radius:8px}.resources{left:12px;top:68px;display:flex;gap:6px;flex-wrap:wrap;max-width:58%}.pill{background:#10201dc9;border:1px solid #ffffff26;border-radius:9px;padding:6px 8px;font-size:11px}.hint{left:50%;top:53%;transform:translate(-50%,-50%);font-size:12px;color:#fff6d6;text-align:center;background:#10201d70;padding:6px 10px;border-radius:9px;opacity:0;transition:opacity .2s}.bottom{position:fixed;z-index:5;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:0;right:0;display:flex;justify-content:space-between;align-items:end;padding:0 16px;pointer-events:none}.joy{width:116px;height:116px;border-radius:50%;background:#dce9dc20;border:1px solid #ffffff65;position:relative;pointer-events:auto;touch-action:none}.knob{position:absolute;width:48px;height:48px;left:33px;top:33px;border-radius:50%;background:#e8f0df66;border:1px solid #fff9;box-shadow:0 3px 10px #0005}.actions{display:grid;grid-template-columns:repeat(2,54px);gap:9px;pointer-events:auto}.act{width:54px;height:54px;border-radius:50%;border:1px solid #fff8;background:#172b27d9;color:#fff;font-size:20px;box-shadow:0 4px 12px #0006;touch-action:manipulation}.act small{display:block;font-size:8px;letter-spacing:.3px}.act.primary{background:#b67a3bdf}.message{position:fixed;z-index:8;left:50%;top:20%;transform:translateX(-50%);background:#13221fed;border:1px solid #e4c48b;border-radius:12px;padding:10px 14px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}.crosshair{position:fixed;left:50%;top:50%;width:5px;height:5px;border-radius:50%;background:#fff9;z-index:2;pointer-events:none}@media(min-width:700px){.bottom{padding:0 28px}.joy{width:130px;height:130px}.knob{left:40px;top:40px}}
+</style></head>
+<body><div id="game"></div><div class="hud brand">ISLA BRUMA<div class="sub">SUPERVIVENCIA · DÍA 1</div></div><div class="hud status"><div>♥ VIDA <span id="hptext">100</span></div><div class="bar"><div class="fill" id="hpbar"></div></div><div>✦ ENERGÍA <span id="sttext">100</span></div><div class="bar"><div class="fill" id="stbar" style="background:linear-gradient(90deg,#69b7b3,#a4e4cb)"></div></div></div><div class="hud resources"><div class="pill">🪵 <span id="wood">0</span></div><div class="pill">🪨 <span id="stone">0</span></div><div class="pill">🫐 <span id="berry">0</span></div><div class="pill">🌿 <span id="fiber">0</span></div></div><div class="hud hint" id="hint">Explorá la isla</div><div class="crosshair"></div><div class="message" id="msg"></div><div class="bottom"><div class="joy" id="joy"><div class="knob" id="knob"></div></div><div class="actions"><button class="act" id="gather">✋<small>RECOGER</small></button><button class="act primary" id="attack">⚔️<small>ATACAR</small></button><button class="act" id="heal">✚<small>CURAR</small></button><button class="act" id="build">⌂<small>REFUGIO</small></button></div></div><script src="game.js"></script></body></html>
