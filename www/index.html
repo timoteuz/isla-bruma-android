@@ -1,124 +1,62 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#101d22">
-  <title>Isla Bruma 3D</title>
-  <style>
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #101d22;
-      font-family: Arial, sans-serif;
-      color: white;
-      touch-action: none;
-    }
-    canvas { display: block; }
-    #hud {
-      position: fixed;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-    }
-    #title {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      font-weight: bold;
-      font-size: 19px;
-      text-shadow: 0 2px 5px black;
-    }
-    #stats {
-      position: absolute;
-      top: 42px;
-      left: 12px;
-      padding: 8px 10px;
-      background: #071115bb;
-      border-radius: 10px;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-    #help {
-      position: absolute;
-      top: 12px;
-      right: 10px;
-      max-width: 48%;
-      text-align: right;
-      font-size: 11px;
-      text-shadow: 0 2px 4px black;
-    }
-    #controls {
-      position: absolute;
-      inset: 0;
-    }
-    .btn {
-      pointer-events: auto;
-      position: absolute;
-      border: 1px solid #ffffff88;
-      border-radius: 50%;
-      width: 62px;
-      height: 62px;
-      color: white;
-      font-weight: bold;
-      background: #172d36cc;
-      font-size: 12px;
-      touch-action: none;
-    }
-    #stick {
-      position: absolute;
-      pointer-events: auto;
-      left: 22px;
-      bottom: 26px;
-      width: 124px;
-      height: 124px;
-      border-radius: 50%;
-      border: 2px solid #ffffff66;
-      background: #07111566;
-      touch-action: none;
-    }
-    #knob {
-      position: absolute;
-      width: 48px;
-      height: 48px;
-      left: 36px;
-      top: 36px;
-      border-radius: 50%;
-      background: #c9e6e9cc;
-      border: 2px solid white;
-    }
-    #attack { right: 22px; bottom: 30px; }
-    #gather { right: 90px; bottom: 102px; }
-    #heal { right: 20px; bottom: 174px; }
-    #message {
-      position: absolute;
-      left: 50%;
-      bottom: 165px;
-      transform: translateX(-50%);
-      padding: 8px 12px;
-      border-radius: 8px;
-      background: #071115bb;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#101d22">
+<title>Isla Bruma 3D</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101d22;color:white;font-family:Arial,sans-serif;touch-action:none}
+#game{position:fixed;inset:0;width:100%;height:100%;display:block}
+#hud{position:fixed;inset:0;pointer-events:none;z-index:2}
+#title{position:absolute;top:10px;left:12px;font-weight:bold;font-size:18px;text-shadow:0 2px 5px #000}
+#stats{position:absolute;top:38px;left:12px;padding:8px;background:#071115bb;border-radius:8px;font-size:12px;line-height:1.5}
+#help{position:absolute;top:10px;right:10px;text-align:right;font-size:11px;text-shadow:0 2px 4px #000}
+#hpbar,#stbar{height:5px;width:100px;background:#555;border-radius:5px;overflow:hidden}
+#hpbar>div{height:100%;width:100%;background:#e85c49}
+#stbar>div{height:100%;width:100%;background:#66c8a1}
+#hint,#msg{position:absolute;left:50%;transform:translateX(-50%);background:#071115cc;border-radius:8px;padding:8px 12px;text-align:center;font-size:12px;white-space:nowrap}
+#hint{bottom:190px;opacity:0}
+#msg{bottom:155px}
+#joy{position:absolute;left:20px;bottom:24px;width:120px;height:120px;border:2px solid #ffffff66;border-radius:50%;background:#07111566;pointer-events:auto}
+#knob{position:absolute;left:34px;top:34px;width:48px;height:48px;border-radius:50%;background:#c9e6e9cc;border:2px solid white}
+.btn{position:absolute;pointer-events:auto;width:62px;height:62px;border:1px solid #ffffff88;border-radius:50%;background:#172d36dd;color:white;font-size:11px;font-weight:bold;touch-action:none}
+#attack{right:18px;bottom:25px;width:76px;height:76px}
+#gather{right:90px;bottom:100px}
+#heal{right:20px;bottom:116px}
+#build{right:20px;bottom:190px}
+#start{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(#08121acc,#08121fee);padding:24px}
+#start button{padding:14px 25px;border:0;border-radius:25px;background:#ffbf50;font-size:17px;font-weight:bold}
+</style>
 </head>
 <body>
-  <div id="hud">
-    <div id="title">ISLA BRUMA 3D</div>
-    <div id="stats">Vida: <span id="hp">100</span><br>Recursos: <span id="wood">0</span></div>
-    <div id="help">Explora la isla<br>Muévete con el control<br>Reúne recursos y sobrevive</div>
-    <div id="controls">
-      <div id="stick"><div id="knob"></div></div>
-      <button class="btn" id="attack">ATACAR</button>
-      <button class="btn" id="gather">REUNIR</button>
-      <button class="btn" id="heal">CURAR</button>
-      <div id="message">La niebla oculta peligros...</div>
-    </div>
+<canvas id="game"></canvas>
+<div id="hud">
+  <div id="title">ISLA BRUMA 3D</div>
+  <div id="stats">
+    Vida: <span id="hptext">100</span>
+    <div id="hpbar"><div id="hp"></div></div>
+    Energía: <span id="sttext">100</span>
+    <div id="stbar"><div id="st"></div></div>
+    <div>🪵 <span id="wood">0</span> · 🪨 <span id="stone">0</span> · 🫐 <span id="berry">0</span> · 🌿 <span id="fiber">0</span></div>
   </div>
-  <script type="module" src="./game.js"></script>
+  <div id="help">Explora la isla<br>Arrastra para mirar<br>Reúne recursos y sobrevive</div>
+  <div id="hint"></div>
+  <div id="msg">La niebla oculta peligros...</div>
+  <div id="joy"><div id="knob"></div></div>
+  <button class="btn" id="attack">ATACAR</button>
+  <button class="btn" id="gather">REUNIR</button>
+  <button class="btn" id="heal">CURAR</button>
+  <button class="btn" id="build">REFUGIO</button>
+</div>
+<div id="start">
+  <div>
+    <h1>ISLA BRUMA</h1>
+    <p>Explora cinco biomas, recoge recursos y sobrevive.</p>
+    <button id="go">ENTRAR EN LA ISLA</button>
+  </div>
+</div>
+<script src="./game.js"></script>
 </body>
 </html>
