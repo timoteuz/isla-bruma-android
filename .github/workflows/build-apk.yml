@@ -1,9 +1,13 @@
-name: Build Isla Bruma APK
+
+name: Build Isla Bruma 3D APK
 
 on:
   workflow_dispatch:
   push:
     branches: [ main ]
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -26,19 +30,19 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Prepare game files
-        run: mkdir -p www && cp index.html www/index.html
+      - name: Bundle 3D game
+        run: npm run build:web
 
       - name: Generate Android project
         run: npx cap add android
 
-      - name: Build debug APK
+      - name: Build APK
         run: cd android && chmod +x gradlew && ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Isla-Bruma-APK
+          name: Isla-Bruma-3D-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 7
