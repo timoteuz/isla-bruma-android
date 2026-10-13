@@ -10,3 +10,6 @@ Esta versión sustituye el lienzo 2D por una escena 3D WebGL usando Three.js. Lo
 
 ## Prototipo jugable
 Incluye isla 3D procedural, cámara de tercera persona, joystick táctil, bosque, pantano, costa, zonas áridas y rocosas, recursos recolectables, criatura hostil, vida, energía, curación y refugio básico. Es un prototipo inicial y requiere pruebas en el dispositivo; no representa todavía un juego comercial final.
+
+## Versión 3
+Texturas procedurales (sin descargas), vegetación instanciada con viento, ciclo día/noche, combate con esquiva, fabricación (hacha, espada, armadura), fogatas, refugios, criaturas nocturnas, jefe "Coloso de la Niebla" y guardado automático. Sube `src/main.js` (y `package.json`) a GitHub y ejecuta la acción de compilar el APK.
