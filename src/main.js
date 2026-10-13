@@ -79,7 +79,7 @@ part(new THREE.CapsuleGeometry(.42,.85,4,8),cloth,0,1.25,0);part(new THREE.Spher
 const legL=part(new THREE.CylinderGeometry(.14,.17,.7,8),pants,-.22,.42,0),legR=part(new THREE.CylinderGeometry(.14,.17,.7,8),pants,.22,.42,0),
  armL=part(new THREE.CylinderGeometry(.12,.13,.62,8),skin,-.52,1.42,0),armR=part(new THREE.CylinderGeometry(.12,.13,.62,8),skin,.52,1.42,0);
 const swordM=new THREE.Group();swordM.add(new THREE.Mesh(new THREE.BoxGeometry(.08,1,.16),std({color:0xc8ced0,metalness:.7,roughness:.35})).translateY(-.95),new THREE.Mesh(new THREE.BoxGeometry(.4,.07,.1),std({color:0x6b4a2b})).translateY(-.42));
-const axeM=new THREE.Group();axeM.add(new THREE.Mesh(new THREE.BoxGeometry(.07,.9,.07),std({color:0x6b4a2b})).translateY(-.6),new THREE.Mesh(new THREE.BoxGeometry(.5,.28,.07),std({color:0x9aa0a0,metalness:.5,roughness:.5})).translate(.18,-1,0));
+const axeM=new THREE.Group();axeM.add(new THREE.Mesh(new THREE.BoxGeometry(.07,.9,.07),std({color:0x6b4a2b})).translateY(-.6),new THREE.Mesh(new THREE.BoxGeometry(.5,.28,.07),std({color:0x9aa0a0,metalness:.5,roughness:.5})).translateX(.18).translateY(-1));
 swordM.rotation.x=axeM.rotation.x=Math.PI/2;armR.add(swordM,axeM);
 function gear(){swordM.visible=!!S.sword;axeM.visible=!S.sword&&!!S.axe;cloth.color.setHex(S.armor?0x7a5a3a:0x385c51)}gear();
 const P=player.position;P.set(0,H(0,0),0);scene.add(player);
