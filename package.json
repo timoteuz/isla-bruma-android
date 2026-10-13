@@ -4,7 +4,8 @@
   "private": true,
   "description": "Isla Bruma 3D survival prototype for Android, bundled for offline play",
   "scripts": {
-    "build:web": "esbuild src/main.js --bundle --minify --outfile=www/game.js",
+    "build:web": "esbuild main.js --bundle --minify --outfile=www/game.js",
+
     "android:sync": "cap sync android"
   },
   "dependencies": {
