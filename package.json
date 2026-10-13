@@ -1,17 +1,19 @@
 {
-  "name": "isla-bruma-android",
-  "version": "1.0.0",
+  "name": "isla-bruma-3d-android",
+  "version": "2.0.0",
   "private": true,
-  "description": "Isla Bruma offline survival game packaged for Android with Capacitor",
+  "description": "Isla Bruma 3D survival prototype for Android, bundled for offline play",
   "scripts": {
-    "android:init": "cap add android",
+    "build:web": "esbuild src/main.js --bundle --minify --outfile=www/game.js",
     "android:sync": "cap sync android"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.3",
-    "@capacitor/core": "^7.4.3"
+    "@capacitor/core": "^7.4.3",
+    "three": "^0.180.0"
   },
   "devDependencies": {
-    "@capacitor/cli": "^7.4.3"
+    "@capacitor/cli": "^7.4.3",
+    "esbuild": "^0.25.10"
   }
 }
