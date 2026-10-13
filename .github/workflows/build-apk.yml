@@ -36,8 +36,8 @@ jobs:
       
       - name: Generate Android project
         run: npx cap add android
-
-      - name: Sync web assets
+      
+      - name: Sync Android project
         run: npx cap sync android
       
 
