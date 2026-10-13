@@ -1,0 +1,6 @@
+{
+  "appId": "com.islabruma.survival",
+  "appName": "Isla Bruma",
+  "webDir": "www",
+  "android": { "allowMixedContent": false }
+}
