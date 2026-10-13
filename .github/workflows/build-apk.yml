@@ -33,8 +33,13 @@ jobs:
       - name: Bundle 3D game
         run: npm run build:web
 
+      
       - name: Generate Android project
         run: npx cap add android
+
+      - name: Sync web assets
+        run: npx cap sync android
+      
 
       - name: Build APK
         run: cd android && chmod +x gradlew && ./gradlew assembleDebug
